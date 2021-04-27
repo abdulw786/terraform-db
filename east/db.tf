@@ -21,7 +21,7 @@ resource "aws_db_instance" "default" {
   name                 = "mydb"
   username             = "foo"
   password             = var.password
-  parameter_group_name = "default-mysql5.7"
+  parameter_group_name = "default-mysql57"
   skip_final_snapshot  = true
   db_subnet_group_name = aws_db_subnet_group.default.name
   vpc_security_group_ids = aws_security_group.default.id
@@ -29,7 +29,7 @@ resource "aws_db_instance" "default" {
 }
 
 resource "aws_db_parameter_group" "default" {
-  name        = "default-mysql5.7"
+  name        = "default-mysql57"
   family      = "mysql5.7"
   parameter {
     name  = "character_set_server"
