@@ -25,7 +25,7 @@ resource "aws_db_instance" "default" {
   password             = var.password
   parameter_group_name = "default-mysql57"
   skip_final_snapshot  = true
-  db_subnet_group_name = aws_db_subnet_group.default.name
+  db_subnet_group_name = aws_db_subnet_group.default[each.key]
   vpc_security_group_ids = aws_security_group.default.id
 
 }
