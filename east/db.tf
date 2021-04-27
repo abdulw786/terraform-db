@@ -30,7 +30,7 @@ resource "aws_db_instance" "default" {
 
 resource "aws_db_parameter_group" "default" {
   name        = "default.mysql5.7"
-  family      = mysql5.7
+  family      = "mysql5.7"
   parameter {
     name  = "character_set_server"
     value = "utf8"
