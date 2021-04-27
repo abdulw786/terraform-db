@@ -9,7 +9,7 @@ data "aws_subnet_ids" "default" {
 
 resource "aws_db_subnet_group" "default" {
   name       = "main"
-  subnet_ids = [data.aws_subnet_ids.default.ids[0], data.aws_subnet_ids.default.ids[1]]
+  subnet_ids = [data.aws_subnet_ids.default.*.id]
 }
 
 resource "aws_db_instance" "default" {
