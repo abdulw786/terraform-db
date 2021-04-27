@@ -1,15 +1,17 @@
 data "aws_vpc" "default" {}
 
-data "aws_subnet" "default" {
+data "aws_subnet_ids" "default" {
   vpc_id = data.aws_vpc.default.id
   tags = {
     tier = "db"
   }
 }
 
+
 resource "aws_db_subnet_group" "default" {
+  for_each   = data.aws_subnet_ids.default.ids
   name       = "main"
-  subnet_ids = [data.aws_subnet.default.*.id]
+  subnet_ids = each.value
 }
 
 resource "aws_db_instance" "default" {
