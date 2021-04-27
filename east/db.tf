@@ -9,9 +9,8 @@ data "aws_subnet_ids" "default" {
 
 
 resource "aws_db_subnet_group" "default" {
-  for_each   = data.aws_subnet_ids.default.ids
   name       = "main"
-  subnet_ids = each.value
+  subnet_ids = [tolist(data.aws_subnet_ids)[0], tolist(data.aws_subnet_ids)[1]]
 }
 
 resource "aws_db_instance" "default" {
@@ -25,7 +24,7 @@ resource "aws_db_instance" "default" {
   password             = var.password
   parameter_group_name = "default-mysql57"
   skip_final_snapshot  = true
-  db_subnet_group_name = aws_db_subnet_group.default[each.key]
+  db_subnet_group_name = aws_db_subnet_group.default.name
   vpc_security_group_ids = aws_security_group.default.id
 
 }
