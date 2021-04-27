@@ -13,7 +13,7 @@ resource "aws_db_subnet_group" "default" {
 }
 
 resource "aws_db_instance" "default" {
-  identifier           = mydatabase
+  identifier           = "mydatabase"
   allocated_storage    = 10
   engine               = "mysql"
   engine_version       = "5.7"
@@ -21,15 +21,15 @@ resource "aws_db_instance" "default" {
   name                 = "mydb"
   username             = "foo"
   password             = var.password
-  parameter_group_name = "default.mysql5.7"
+  parameter_group_name = "default-mysql5.7"
   skip_final_snapshot  = true
   db_subnet_group_name = aws_db_subnet_group.default.name
-  vpc_security_group_ids = aws_security_groups.default.id
+  vpc_security_group_ids = aws_security_group.default.id
 
 }
 
 resource "aws_db_parameter_group" "default" {
-  name        = "default.mysql5.7"
+  name        = "default-mysql5.7"
   family      = "mysql5.7"
   parameter {
     name  = "character_set_server"
