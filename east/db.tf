@@ -44,7 +44,7 @@ resource "aws_db_parameter_group" "default" {
 }
 
 resource "aws_db_instance" "fromsnapshot" {
-  identifier           = "mydatabase"
+  identifier           = "mydatabase1"
   allocated_storage    = 10
   engine               = "mysql"
   engine_version       = "5.7"
