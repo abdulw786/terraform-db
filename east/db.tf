@@ -45,7 +45,6 @@ resource "aws_db_parameter_group" "default" {
 
 resource "aws_db_instance" "fromsnapshot" {
   instance_class      = "db.t2.micro"
-  name                = "mydbsnap"
   snapshot_identifier = "mysnap"
 
   lifecycle {
