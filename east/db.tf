@@ -42,3 +42,13 @@ resource "aws_db_parameter_group" "default" {
     value = "utf8"
   }
 }
+
+resource "aws_db_instance" "fromsnapshot" {
+  instance_class      = "db.t2.micro"
+  name                = "mydbsnap"
+  snapshot_identifier = "mysnap"
+
+  lifecycle {
+    ignore_changes = [snapshot_identifier]
+  }
+}
