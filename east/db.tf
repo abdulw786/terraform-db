@@ -44,9 +44,18 @@ resource "aws_db_parameter_group" "default" {
 }
 
 resource "aws_db_instance" "fromsnapshot" {
-  instance_class      = "db.t2.micro"
-  snapshot_identifier = "mysnap"
-
+  identifier           = "mydatabase"
+  allocated_storage    = 10
+  engine               = "mysql"
+  engine_version       = "5.7"
+  instance_class       = "db.t2.micro"
+  username             = "foo"
+  password             = var.password
+  parameter_group_name = "default-mysql57"
+  skip_final_snapshot  = true
+  snapshot_identifier  = "mysnap"
+  db_subnet_group_name = aws_db_subnet_group.default.name
+  vpc_security_group_ids = [aws_security_group.default.id]
   lifecycle {
     ignore_changes = [snapshot_identifier]
   }
